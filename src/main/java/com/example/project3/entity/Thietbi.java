@@ -1,6 +1,11 @@
 package com.example.project3.entity;
 import java.util.List;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 @Entity
 @Table(name = "thietbi")
 public class Thietbi {
@@ -18,10 +23,7 @@ public class Thietbi {
         this.maTB = maTB;
         this.tenTB = tenTB;
         this.mota = mota;
-    }
-    
-    @OneToMany(mappedBy = "thietBi", cascade = CascadeType.ALL)
-    private List<Thongtinsd> thongtinsd;
+    } 
 
     public int getMaTB() {
         return maTB;
@@ -41,10 +43,7 @@ public class Thietbi {
     public void setMota(String mota) {
         this.mota = mota;
     }
-    public List<Thongtinsd> getThongtinsd() {
-        return thongtinsd;
-    }
-    public void setThongtinsd(List<Thongtinsd> thongtinsd) {
-        this.thongtinsd = thongtinsd;
-    }
+   
+    @OneToMany(mappedBy = "thietBi", cascade = CascadeType.ALL)
+    private List<Thongtinsd> thongtinsd;
 }

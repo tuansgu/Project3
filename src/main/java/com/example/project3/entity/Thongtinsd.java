@@ -1,10 +1,6 @@
 package com.example.project3.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
 import java.sql.Timestamp;
 import jakarta.persistence.*;
 @Entity

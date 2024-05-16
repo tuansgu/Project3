@@ -29,6 +29,9 @@ public class Member {
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "thanhVien",fetch = FetchType.LAZY)
+    // @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "thanhVien",fetch = FetchType.LAZY)
+    // private List<Thongtinsd> usages;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "thanhVien")
     private List<Thongtinsd> usages;
 }
