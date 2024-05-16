@@ -1,5 +1,12 @@
 package com.example.project3.repository;
 
-public class MemberRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.project3.entity.Member;
+
+@Repository
+public interface MemberRepository extends JpaRepository<Member, Integer>{
+
     
 }

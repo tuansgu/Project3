@@ -93,14 +93,7 @@
               >
                 đặt chỗ
               </button>
-              <button
-                type="button"
-                class="btn btn-primary w-25 ms-2"
-                data-bs-target="#myModal_muon"
-                onclick="showModalMuon()"
-              >
-                Mượn
-              </button>
+            
             </div>
           </div>
         </div>
@@ -231,115 +224,7 @@
       </div>
     </div>
 
-    <!-- modal mượn -->
-    <div class="modal fade" id="myModal_muon" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
-              Thông Tin Mượn Chỗ
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="container">
-            <div class="row">
-              <div class="col-2">
-                <span>Mã Thành viên:</span>
-              </div>
-              <div class="col-2">
-                <input
-                  type="number"
-                  step=""
-                  value=""
-                  id="detail_good_id"
-                  name="detail_good_id"
-                  disabled
-                  class="border-0 border-bottom border-dark text-center w-100"
-                />
-              </div>
-              <div class="col-2">
-                <span>Thời Gian Mượn:</span>
-              </div>
-              <div class="col-4">
-                <input
-                  type="datetime-local"
-                  id="datetime"
-                  name="datet_muon"
-                  step="1"
-                  disabled
-                />
-              </div>
-            </div>
-            <div class="row mt-2">
-              <div class="col-2">
-                <span>Tên Thành Viên:</span>
-              </div>
-              <div class="col-2">
-                <input
-                  type="text"
-                  step=""
-                  value=""
-                  id="detail_person"
-                  name="detail_person"
-                  disabled
-                  class="border-0 border-bottom border-dark text-center w-100"
-                />
-              </div>
-            </div>
-            <div class="row mt-2">
-              <div style="height: 300px; overflow: auto" class="container">
-                <table id="load_datcho_thietbi" class="table table-striped">
-                  <thead>
-                    <div style="max-height: 100%; overflow: auto">
-                      <tr>
-                        <th></th>
-                        <th>STT</th>
-                        <th>Mã Thiết Bị</th>
-                        <th>Tên Thiết Bị</th>
-                        <th>Mô tả</th>
-                      </tr>
-                    </div>
-                  </thead>
-                  <tbody style="overflow: auto">
-                    <!--  -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="row mt-4">
-              <div class="col-8"></div>
-              <div class="col-4">
-                <div class="row">
-                  <div class="col-5">
-                    <span>Tổng số thiết bị:</span>
-                  </div>
-                  <div class="col-5">
-                    <span id="total_thietbi"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Đóng
-            </button>
-            <button type="button" onclick="dat_cho()" class="btn btn-primary">
-              Xác nhận
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+  
   </body>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -471,7 +356,7 @@
       ).length;
       return sum;
     }
-
+    //  đặt chỗ
     function dat_cho() {
       const tbody = document.querySelector("#load_datcho_thietbi tbody");
       var selectedDateTime = document.getElementById("datetime").value;
@@ -486,7 +371,7 @@
           const cells = row.querySelectorAll("td");
           const maThietBi = parseInt(cells[2].innerText);
           dataArray.push({
-            thanhVien: { maTV: 1121530087 },
+            thanhVien: { maTV: 1120150184 },
             tgDatCho: timestamp,
             thietBi: { maTB: maThietBi },
           });
@@ -517,23 +402,7 @@
     // data-bs-target="#myModal_muon"
     //             onclick="showModalMuon()"
     let maTV=1120150184
-    function showModalMuon() {
-      
-      fetch(`http://localhost:8080/thietbismuon?maTV=maTV`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then(function (response) {
-          console.log(response.data);
-         
-        })
-        .catch(function (error) {
-          console.error(error);
-          // Xử lý lỗi (ví dụ: hiển thị thông báo lỗi cho người dùng)
-        });
-    }
+  
     function tongThietBi() {
       const sum = document.querySelectorAll(
         "#load_datcho_thietbi tbody tr"

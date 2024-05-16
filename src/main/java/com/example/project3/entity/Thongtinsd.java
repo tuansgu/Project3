@@ -3,6 +3,7 @@ package com.example.project3.entity;
 
 import java.sql.Timestamp;
 import jakarta.persistence.*;
+
 @Entity
 @Table(name = "thongtinsd")
 public class Thongtinsd {

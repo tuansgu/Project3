@@ -1,5 +1,10 @@
 package com.example.project3.repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public class ThongTinSudungRepository {
+import com.example.project3.entity.Thongtinsd;
+
+@Repository
+public interface ThongTinSudungRepository extends JpaRepository<Thongtinsd, Integer>{
     
 }
