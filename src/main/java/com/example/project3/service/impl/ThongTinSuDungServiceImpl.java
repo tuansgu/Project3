@@ -28,13 +28,20 @@ public class ThongTinSuDungServiceImpl implements ThongTinSuDungService {
     public Thongtinsd addThongtinsd(Thongtinsd thongtinsd) {
         return thongTinSudungRepository.save(thongtinsd);
     }
-   @Scheduled(fixedRate = 3600000)
-    public void xoaTGDatChoKhongSuDung() {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime oneHourAgo = now.minus(1, ChronoUnit.HOURS);
-        thongTinSudungRepository.findByTGDatChoBeforeAndMaTBIsNull(oneHourAgo)
-            .forEach(thongTinSuDung -> {
-                thongTinSudungRepository.delete(thongTinSuDung);
-            });
+    @Scheduled(fixedRate = 3600000)
+    public void huyDatChoKhongSuDung() {
+        // Lấy thời gian hiện tại
+        LocalDateTime baygio = LocalDateTime.now();
+        LocalDateTime motGioTruoc = baygio.minusHours(1); // 1 giờ trước
+    
+        // Truy vấn các đặt chỗ đã đặt trước hơn 1 giờ nhưng chưa được mượn
+        List<Thongtinsd> cacDatChoQuaGio = thongTinSudungRepository.timCacDatChoQuaGio(motGioTruoc);
+    
+        // Hủy các đặt chỗ quá hạn
+        for (Thongtinsd datCho : cacDatChoQuaGio) {
+            thongTinSudungRepository.delete(datCho);
+        }
     }
+    
+    
 }

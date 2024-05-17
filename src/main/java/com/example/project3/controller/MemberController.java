@@ -15,8 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.project3.entity.Member;
 import com.example.project3.repository.MemberRepository;
-import com.example.project3.service.Impl.MemberNotFoundException;
-import com.example.project3.service.Impl.MemberServiceImpl;
+import com.example.project3.service.impl.MemberNotFoundException;
+import com.example.project3.service.impl.MemberServiceImpl;
 
 import org.springframework.ui.Model;
 

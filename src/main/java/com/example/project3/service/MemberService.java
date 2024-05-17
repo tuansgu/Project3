@@ -1,7 +1,7 @@
 package com.example.project3.service;
 
 import com.example.project3.entity.Member;
-import com.example.project3.service.Impl.MemberNotFoundException;
+import com.example.project3.service.impl.MemberNotFoundException;
 
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;

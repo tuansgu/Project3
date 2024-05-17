@@ -1,4 +1,4 @@
-package com.example.project3.service.Impl;
+package com.example.project3.service.impl;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Optional;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.project3.entity.Member;
 import com.example.project3.repository.MemberRepository;
-
+import com.example.project3.service.MemberService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
@@ -91,11 +91,9 @@ public class MemberServiceImpl implements MemberService {
   public boolean checkMemberID(int MaTV) {
     return memberRepository.existsByMaTV(MaTV);
   }
-
   @Override
   public boolean changePassword(int maTV, String currentPassword, String newPassword) {
     Member member = memberRepository.findById(maTV).orElse(null);
-
     if (member != null && member.getPassword().equals(currentPassword)) {
       member.setPassword(newPassword);
       memberRepository.save(member);

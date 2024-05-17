@@ -63,12 +63,30 @@
             />
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" th:if="${member != null}" th:href="@{'/hosothanhvien?maTV=' + ${member.maTV}}">Hồ sơ thành viên</a></li>
-            <li><a class="dropdown-item" th:if="${member == null}" th:href="@{/login}">Đăng nhập</a></li>
+            <li>
+              <a
+                class="dropdown-item"
+                th:if="${member != null}"
+                th:href="@{'/hosothanhvien?maTV=' + ${member.maTV}}"
+                >Hồ sơ thành viên</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                th:if="${member == null}"
+                th:href="@{/login}"
+                >Đăng nhập</a
+              >
+            </li>
             <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
           </ul>
-          <span class="me-2" th:if="${member != null}" th:text="${member.HoTen}"></span>
+          <span
+            class="me-2"
+            th:if="${member != null}"
+            th:text="${member.HoTen}"
+          ></span>
           <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" href="#">Trang cá nhân</a></li>
 
@@ -93,7 +111,6 @@
               >
                 đặt chỗ
               </button>
-            
             </div>
           </div>
         </div>
@@ -139,8 +156,8 @@
                   type="number"
                   step=""
                   value=""
-                  id="detail_good_id"
-                  name="detail_good_id"
+                  id="inputMaTV"
+                  name="ma_thanhvien"
                   disabled
                   class="border-0 border-bottom border-dark text-center w-100"
                 />
@@ -167,8 +184,8 @@
                   type="text"
                   step=""
                   value=""
-                  id="detail_person"
-                  name="detail_person"
+                  id="inputHoTen"
+                  name="ten_thanhvien"
                   disabled
                   class="border-0 border-bottom border-dark text-center w-100"
                 />
@@ -223,8 +240,6 @@
         </div>
       </div>
     </div>
-
-  
   </body>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -357,10 +372,15 @@
       return sum;
     }
     //  đặt chỗ
+    let decodedMaTV;
+    const maTV = getCookie("MaTV");
+    decodedMaTV = maTV ? decodeURIComponent(maTV) : null;
+    document.getElementById("inputMaTV").value = decodedMaTV;
     function dat_cho() {
       const tbody = document.querySelector("#load_datcho_thietbi tbody");
       var selectedDateTime = document.getElementById("datetime").value;
       var timestamp = new Date(selectedDateTime).getTime();
+
       if (tbody.children.length === 0) {
         alert("Thiết bị đặt chỗ đang trống, vui lòng chọn thiết bị để đặt chỗ");
         $("#myModal_datcho").modal("hide");
@@ -371,7 +391,7 @@
           const cells = row.querySelectorAll("td");
           const maThietBi = parseInt(cells[2].innerText);
           dataArray.push({
-            thanhVien: { maTV: 1120150184 },
+            thanhVien: { maTV: decodedMaTV },
             tgDatCho: timestamp,
             thietBi: { maTB: maThietBi },
           });
@@ -384,7 +404,8 @@
           })
           .then(function (response) {
             console.log(response.data);
-            // Xử lý phản hồi thành công của việc đặt chỗ (ví dụ: hiển thị thông báo xác nhận)
+            $("#myModal_datcho").modal("hide");
+            load_data()
           })
           .catch(function (error) {
             console.error(error);
@@ -401,13 +422,30 @@
 
     // data-bs-target="#myModal_muon"
     //             onclick="showModalMuon()"
-    let maTV=1120150184
-  
+
     function tongThietBi() {
       const sum = document.querySelectorAll(
         "#load_datcho_thietbi tbody tr"
       ).length;
       return sum;
+    }
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(";").shift();
+      return null;
+    }
+    const hoten = getCookie("hoten");
+
+    const decodedHoten = hoten
+      ? decodeURIComponent(hoten.replace(/\+/g, " "))
+      : null;
+
+    // Hiển thị giá trị trên console (hoặc sử dụng theo nhu cầu của bạn)
+    console.log("Tên thành viên:", decodedHoten);
+    if (decodedHoten) {
+      document.getElementById("inputHoTen").value = decodedHoten;
     }
   </script>
 </html>

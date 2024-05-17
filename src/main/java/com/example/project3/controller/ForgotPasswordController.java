@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.project3.entity.Member;
 import com.example.project3.repository.MemberRepository;
-import com.example.project3.service.Impl.MemberNotFoundException;
-import com.example.project3.service.Impl.MemberServiceImpl;
+import com.example.project3.service.impl.MemberNotFoundException;
+import com.example.project3.service.impl.MemberServiceImpl;
 
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.project3.entity.Member;
 import com.example.project3.repository.MemberRepository;
-import com.example.project3.service.Impl.MemberServiceImpl;
+import com.example.project3.service.impl.MemberServiceImpl;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,12 +40,16 @@ public class LoginController {
     if (optionalMember.isPresent()) {
       Member member = optionalMember.get();
       String hoten = member.getHoTen();
+      String maTV = member.getMaTV() + "";
       session.setAttribute("loggedInMaTV", MaTV);
       // Lưu thông tin tên thành viên vào cookie
       String encodedValue = URLEncoder.encode(hoten, "UTF-8");
+      String encodedMaTV = URLEncoder.encode(maTV, "UTF-8");
       Cookie cookie = new Cookie("hoten", encodedValue);
+      Cookie cookieMaTV = new Cookie("MaTV", encodedMaTV);
       cookie.setMaxAge(3600); // Thời gian sống của cookie (1 giờ)
       response.addCookie(cookie);
+      response.addCookie(cookieMaTV);
       redirectAttributes.addFlashAttribute("member", member);
 
       return "redirect:/index";
