@@ -8,4 +8,5 @@ import com.example.project3.entity.Thongtinsd;
 public interface ThongTinSuDungService {
 
     public Thongtinsd addThongtinsd(Thongtinsd thongtinsd);
+    
 }
