@@ -317,7 +317,6 @@
     // load những thiết bị lưu vào thông tin đặt chỗ
     function showModalDatCho() {
       let existingRow;
-
       const selectedCheckboxes = document.querySelectorAll(
         "#load_data .thietbi_id:checked"
       );
@@ -403,13 +402,18 @@
             },
           })
           .then(function (response) {
-            console.log(response.data);
-            $("#myModal_datcho").modal("hide");
-            load_data()
+            const responseData = response.data;
+            if (responseData.startsWith("thực hiện đặt chỗ thành công")) {
+              alert("Đặt chỗ thành công");
+              $("#myModal_datcho").modal("hide");
+              tbody.innerHTML = "";
+              load_data();
+            } else if (responseData.startsWith("đặt chỗ thất bại")) {
+              alert(responseData);
+            }
           })
           .catch(function (error) {
             console.error(error);
-            // Xử lý lỗi (ví dụ: hiển thị thông báo lỗi cho người dùng)
           });
       }
     }

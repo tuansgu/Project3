@@ -8,5 +8,6 @@ import com.example.project3.entity.Thongtinsd;
 public interface ThongTinSuDungService {
 
     public Thongtinsd addThongtinsd(Thongtinsd thongtinsd);
-    
+    // kiểm tra mượn thiết bị
+    Boolean kiemTraDatCho(Thongtinsd thongtinsd);
 }
