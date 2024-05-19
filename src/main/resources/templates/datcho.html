@@ -320,9 +320,10 @@
       const selectedCheckboxes = document.querySelectorAll(
         "#load_data .thietbi_id:checked"
       );
-      let totalCount = selectedCheckboxes.length;
-
+      // let totalCount = selectedCheckboxes.length;
+      let currentRowCount = document.querySelectorAll("#load_datcho_thietbi tbody tr").length;
       // console.log(selectedCheckboxes.length);
+      let newIndex = 0;
       selectedCheckboxes.forEach(function (checkbox, index) {
         const productRow = checkbox.closest("tr");
         const maTB = checkbox.value;
@@ -333,6 +334,7 @@
         existingRow = document.querySelector(
           `#load_datcho_thietbi tbody tr[data-maTB="${maTB}"]`
         );
+        
         if (!existingRow) {
           // Nếu chưa tồn tại, thêm mới
           const newRow = document.createElement("tr");
@@ -347,7 +349,7 @@
                     </svg>
                 </span>
             </td>
-          <td>${index + 1}</td>
+          <td>${currentRowCount +  newIndex + 1}</td>
           <td>${maTB}</td>
           <td>${tenTB}</td>
           <td>${mota}</td>
@@ -355,9 +357,10 @@
           document
             .querySelector("#load_datcho_thietbi tbody")
             .appendChild(newRow);
+            newIndex++; 
         }
       });
-      document.getElementById("total_thietbi").textContent = totalCount;
+      document.getElementById("total_thietbi").textContent = tongThietBi();
       selectedCheckboxes.forEach(function (checkbox) {
         checkbox.checked = false;
       });

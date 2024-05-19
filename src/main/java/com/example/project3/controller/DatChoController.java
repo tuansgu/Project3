@@ -51,7 +51,8 @@ public class DatChoController {
                 }
                 return "thực hiện đặt chỗ thành công";
             } else {
-                return "đặt chỗ thất bại cho các thiết bị: " + conflictingDevices+"!. thiết bị đã được đặt chỗ trong ngày";
+                return "đặt chỗ thất bại cho các thiết bị: " + conflictingDevices
+                        + "!. thiết bị đã được đặt chỗ trong ngày";
             }
         } catch (Exception e) {
             return "Đã xảy ra lỗi khi đặt chỗ: " + e.getMessage();

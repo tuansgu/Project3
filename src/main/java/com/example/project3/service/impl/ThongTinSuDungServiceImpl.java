@@ -49,8 +49,20 @@ public class ThongTinSuDungServiceImpl implements ThongTinSuDungService {
     public Boolean kiemTraDatCho(Thongtinsd thongtinsd) {
         Thietbi selectTB=thongtinsd.getThietBi();
         Date reserveDate = new Date(thongtinsd.getTgDatCho().getTime());
+        // Timestamp reserveDate = thongtinsd.getTgDatCho();
         List<Thongtinsd> isCheck=thongTinSudungRepository.findValidDeviceUsage(selectTB, reserveDate);
         return isCheck.isEmpty();
+    }
+
+    @Override
+    public List<Thongtinsd> findValidDeviceUsage1Hour(Timestamp deadline) {
+        return thongTinSudungRepository.findValidDeviceUsage1Hour(deadline);
+
+    }
+
+    @Override
+    public void deleteAll(Iterable<Thongtinsd> thongtinsd) {
+       thongTinSudungRepository.deleteAll(thongtinsd);
     }
 }
 
